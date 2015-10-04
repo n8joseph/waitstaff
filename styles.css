@@ -2,8 +2,23 @@ body {
 	font-family: 'Work Sans', sans-serif;
 }
 
+
 h1 {
 	font-weight: 700;
+	margin-bottom: 3%;
+}
+
+h3 {
+	margin-bottom: 20px;
+}
+
+#midbutton {
+	margin-right: 6px;
+	margin-left: 6px;
+}
+
+button {
+	outline: none !important;
 }
 
 hr {
@@ -17,3 +32,44 @@ hr {
 	font-weight: 700;
 }
 
+label {
+	margin-right: -24px;
+	margin-left: 18px;
+	margin-top: -4px
+}
+
+input {
+	padding-left: 2px;
+}
+
+.mealbox {
+	border: 2px solid black;
+	padding-bottom: 20px;
+	padding-top: 0px;
+	padding-right: -40px;
+	margin-top: 40px;
+	border-radius: 25px;
+
+}
+
+.customerbox {
+	border: 2px solid black;
+	padding-bottom: 20px;
+	padding-top: 0px;
+	margin-top: 40px;
+	border-radius: 25px;
+}
+
+.earningsbox {
+	border: 2px solid black;
+	padding-bottom: 20px;
+	padding-top: 0px;
+	margin-top: 40px;
+	border-radius: 25px;
+}
+
+.homebox {
+	/* border: 1px solid black; */
+	padding-bottom: 20px;
+	padding-top: 40px;
+}

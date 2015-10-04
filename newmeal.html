@@ -1,0 +1,72 @@
+<div class="container">      
+    <div class="row">
+
+      <div class="col-md-6 col-xs-12 text-center mealbox">
+        <h3>Enter the Meal Details</h3>
+        <form name="details" class="form-horizontal" novalidate ng-submit="submit()">
+          
+            <div class="form-group">
+              <label for="base" class="col-xs-6 control-label text-right">Base Meal Price: &nbsp; $</label>
+              <div class="col-xs-6 text-left">
+                <input type="number" name="price" id="base" required placeholder="0.00" ng-model="meal.price"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tax" class="col-xs-6 control-label text-right">Tax Rate: &nbsp; %</label>
+              <div class="col-xs-6 text-left">
+                <input type="number" name="tax" id="tax" ng-model="meal.tax"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tip" class="col-xs-6 control-label text-right">Tip Percentage: &nbsp; %</label>
+              <div class="col-xs-6 text-left">
+                <input type="number" name="tip" id="tip" ng-model="meal.tip"/>
+              </div>
+           </div>
+
+           <button type="submit" class="btn btn-default">Submit</button>
+
+           <button ng-click="clear()" class="btn btn-default">Clear</button>
+
+        </form>
+          <div ng-if="details.$submitted" ng-messages="details.price.$error">
+            <br/>
+            <span class="error" ng-message="required"><strong>No free meals!</span>
+          </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12 text-center customerbox">
+          <h3>Customer Charges</h3>
+          
+          <div class="row">
+            <div class="col-xs-6 text-right">
+              Subtotal: 
+            </div>
+            <div class="col-xs-6 text-left">
+              {{ meal.price + (meal.price * meal.tax / 100) | currency}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-6 text-right">
+              Tip: 
+            </div>
+            <div class="col-xs-6 text-left">
+              {{ meal.price * meal.tip / 100 | currency }}
+            </div>
+          </div>
+          <hr width="32%">
+          <div class="row">
+            <div class="col-xs-6 text-right">
+              Total: 
+            </div>
+            <div class="col-xs-6 text-left">
+              {{ (meal.price + (meal.price * meal.tax / 100)) + (meal.price * meal.tip / 100) | currency }}
+            </div>
+          </div>
+      </div>
+
+  </div>
+ </div>

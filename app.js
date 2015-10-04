@@ -1,5 +1,20 @@
-angular.module('myApp', ['ngMessages'])
-	.controller('MyCtrl', function($scope) {
+angular.module('myApp', ['ngMessages', 'ngRoute'])
+	.value('pages', ['home', 'newmeal', 'myearnings'])
+	.config(['$routeProvider', function($routeProvider) {
+		$routeProvider.when('/', {
+			templateUrl : 'home.html',
+			controller : 'MyCtrl as ctrl'
+		}).when('/newmeal', {
+			templateUrl : 'newmeal.html',
+			controller : 'MyCtrl as ctrl'
+		}).when('/myearnings', {
+			templateUrl : 'myearnings.html',
+			controller : 'MyCtrl as ctrl'
+		}).when('/error', {
+			template : '<p>Error - Page Not Found</p>'
+		})
+	}])
+	.controller('MyCtrl', ['$scope', '$location', function($scope, $location) {
 		$scope.meal = {tax: 0, tip: 0};
 		$scope.total = {tip: 0, mealcount: 0};
 		$scope.clear = function() {
@@ -15,7 +30,17 @@ angular.module('myApp', ['ngMessages'])
 				$scope.details.$setPristine();
 			};
 		};
+		$scope.isActive = function(viewLocation) {
+			return viewLocation === $location.path();
+		};
+		$scope.test = function($rootScope) {
+			
+		};
 				
-	});
-	
+	}])
+	.run(['$rootScope', function ($rootScope) {
+		$rootScope.$on('$routeChangeError', function() {
+		$location.path('/error')
+		})
+	}]);
 	
