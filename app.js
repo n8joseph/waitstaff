@@ -10,13 +10,22 @@ angular.module('myApp', ['ngMessages', 'ngRoute'])
 		}).when('/myearnings', {
 			templateUrl : 'myearnings.html',
 			controller : 'MyCtrl as ctrl'
-		}).when('/error', {
-			template : '<p>Error - Page Not Found</p>'
-		})
+		}).otherwise({redirectTo: '/'})
+	}])
+	
+	.controller('rootCtrl', ['$scope', '$location', function($scope, $location) {
+		$scope.meal = {tax: 0, tip: 0};
+		$scope.total = {tip: 0, mealcount: 0};	
+		$scope.isActive = function(viewLocation) {
+			return viewLocation === $location.path();
+		};
+		$scope.test = function() {
+			console.log("total meal count: " + $scope.total.mealcount)
+			
+		};
 	}])
 	.controller('MyCtrl', ['$scope', '$location', function($scope, $location) {
-		$scope.meal = {tax: 0, tip: 0};
-		$scope.total = {tip: 0, mealcount: 0};
+
 		$scope.clear = function() {
 			$scope.meal.tax = 0;
 			$scope.meal.tip = 0;
@@ -28,19 +37,10 @@ angular.module('myApp', ['ngMessages', 'ngRoute'])
 				$scope.total.mealcount += 1;
 				$scope.clear();
 				$scope.details.$setPristine();
+				console.log("total meal count: " + $scope.total.mealcount)
 			};
-		};
-		$scope.isActive = function(viewLocation) {
-			return viewLocation === $location.path();
-		};
-		$scope.test = function($rootScope) {
-			
 		};
 				
 	}])
-	.run(['$rootScope', function ($rootScope) {
-		$rootScope.$on('$routeChangeError', function() {
-		$location.path('/error')
-		})
-	}]);
+
 	
